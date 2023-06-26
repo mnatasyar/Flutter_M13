@@ -1,25 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_m13/pertemuan13/pertemuan13_provider.dart';
-import 'package:provider/provider.dart';
 
-class ProgressIndicatorWidget extends StatelessWidget {
-  const ProgressIndicatorWidget({Key? key});
+class Pertemuan13Provider extends ChangeNotifier {
+  double _progressValue = 0.0;
+  bool _sedangMemanggang = false;
 
-  @override
-  Widget build(BuildContext context) {
-    final prov = Provider.of<Pertemuan13Provider>(context);
-    return ElevatedButton(
-      style: ElevatedButton.styleFrom(minimumSize: const Size(100, 90)),
-      onPressed: () {
-        prov.mulaiMemanggang(prov.sliderValue.round());
-      },
-      child: prov.sedangMemanggang
-          ? LinearProgressIndicator(
-              value: prov.progressValue, // Provide the progress value here
-              valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-              backgroundColor: Colors.grey,
-            )
-          : const Text('Panggang'),
-    );
+  double get progressValue => _progressValue;
+  bool get sedangMemanggang => _sedangMemanggang;
+
+  void mulaiMemanggang(int duration) async {
+    _sedangMemanggang = true;
+    notifyListeners();
+
+    for (int i = 0; i <= duration; i++) {
+      _progressValue = i.toDouble() / duration.toDouble();
+      notifyListeners();
+      await Future.delayed(const Duration(seconds: 1));
+    }
+
+    _sedangMemanggang = false;
+    _progressValue = 0.0;
+    notifyListeners();
   }
 }
