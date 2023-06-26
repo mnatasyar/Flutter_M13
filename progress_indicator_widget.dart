@@ -22,3 +22,6 @@ class ProgressIndicatorWidget extends StatelessWidget {
           : const Text('Panggang'));
   }
 }
+
+Ubah circularProgressIndicator menjadi tipe determine indicator sehingga 
+menampilkan lama proses.
