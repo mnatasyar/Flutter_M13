@@ -51,3 +51,20 @@ if (_dateRange != null) {
     ),
   );
 }
+
+import 'package:intl/intl.dart';
+
+if (_dateRange != null) {
+  ListTile(
+    title: const Text('Rentang Tanggal Terpilih'),
+    subtitle: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        for (int i = 0; i <= _dateRange!.end.difference(_dateRange!.start).inDays; i++) 
+          Text(
+            '${DateFormat('EEEE, dd MMMM yyyy').format(_dateRange!.start.add(Duration(days: i)))}',
+          ),
+      ],
+    ),
+  );
+}
