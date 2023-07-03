@@ -22,3 +22,18 @@ class SlideWidget extends StatelessWidget {
     );
   }
 }
+
+
+
+if (_dateRange != null) {
+  ListTile(
+    title: const Text('Rentang Tanggal Terpilih'),
+    subtitle: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        for (DateTime date in _dateRange!.getRange(_dateRange!.start, _dateRange!.end))
+          Text(date.toString().split(' ')[0]),
+      ],
+    ),
+  );
+}
