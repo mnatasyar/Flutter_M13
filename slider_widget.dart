@@ -68,3 +68,24 @@ if (_dateRange != null) {
     ),
   );
 }
+
+import 'package:intl/intl.dart';
+import 'package:intl/date_symbol_data_local.dart';
+
+if (_dateRange != null) {
+  initializeDateFormatting('id_ID', null); // Menginisialisasi bahasa Indonesia
+
+  ListTile(
+    title: const Text('Rentang Tanggal Terpilih'),
+    subtitle: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        for (int i = 0; i <= _dateRange!.end.difference(_dateRange!.start).inDays; i++) 
+          Text(
+            '${DateFormat('EEEE, dd MMMM yyyy', 'id_ID').format(_dateRange!.start.add(Duration(days: i)))}',
+          ),
+      ],
+    ),
+  );
+}
+
